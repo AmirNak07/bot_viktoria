@@ -7,6 +7,7 @@ from aiogram_dialog import DialogManager, StartMode, setup_dialogs
 
 from config import settings
 from dialogs.main_menu import main_menu_dialog
+from dialogs.platform_search import platform_search_dialog
 from dialogs.start import StartStates, start_dialog
 
 bot = Bot(token=settings.BOT_TOKEN)
@@ -21,6 +22,7 @@ async def command_start(message: Message, dialog_manager: DialogManager) -> None
 async def main() -> None:
     dp.include_router(start_dialog)
     dp.include_router(main_menu_dialog)
+    dp.include_router(platform_search_dialog)
     setup_dialogs(dp)
     await dp.start_polling(bot)
 
