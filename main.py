@@ -6,9 +6,10 @@ from aiogram.types import Message
 from aiogram_dialog import DialogManager, StartMode, setup_dialogs
 
 from config import settings
-from dialogs.main_menu import main_menu_dialog
-from dialogs.platform_search.dialog import platform_search_dialog
-from dialogs.start import StartStates, start_dialog
+from dialogs.main_menu.windows import main_menu_dialog
+from dialogs.platform_search.windows import platform_search_dialog
+from dialogs.start.states import StartStates
+from dialogs.start.windows import start_dialog
 
 bot = Bot(token=settings.BOT_TOKEN)
 dp = Dispatcher()
