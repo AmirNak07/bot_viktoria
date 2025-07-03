@@ -10,6 +10,7 @@ from dialogs.main_menu.windows import main_menu_dialog
 from dialogs.platform_search.windows import platform_search_dialog
 from dialogs.start.states import StartStates
 from dialogs.start.windows import start_dialog
+from dialogs.useful_links.window import dialog as useful_link_dialog
 
 bot = Bot(token=settings.BOT_TOKEN)
 dp = Dispatcher()
@@ -24,6 +25,7 @@ async def main() -> None:
     dp.include_router(start_dialog)
     dp.include_router(main_menu_dialog)
     dp.include_router(platform_search_dialog)
+    dp.include_router(useful_link_dialog)
     setup_dialogs(dp)
     await dp.start_polling(bot)
 
