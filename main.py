@@ -6,6 +6,7 @@ from aiogram.types import Message
 from aiogram_dialog import DialogManager, StartMode, setup_dialogs
 
 from config import settings
+from dialogs.feedback_menu.window import dialog as feedback_dialog
 from dialogs.main_menu.windows import main_menu_dialog
 from dialogs.platform_search.windows import platform_search_dialog
 from dialogs.start.states import StartStates
@@ -26,6 +27,7 @@ async def main() -> None:
     dp.include_router(main_menu_dialog)
     dp.include_router(platform_search_dialog)
     dp.include_router(useful_link_dialog)
+    dp.include_router(feedback_dialog)
     setup_dialogs(dp)
     await dp.start_polling(bot)
 

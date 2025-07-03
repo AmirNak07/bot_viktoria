@@ -2,7 +2,11 @@ from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button
 from aiogram_dialog.widgets.text import Const
 
-from dialogs.main_menu.handlers import go_to_select_platforms, go_to_useful_links
+from dialogs.main_menu.handlers import (
+    go_to_feedback,
+    go_to_select_platforms,
+    go_to_useful_links,
+)
 from dialogs.main_menu.states import MainMenuStates
 
 main_menu_window = Window(
@@ -13,7 +17,7 @@ main_menu_window = Window(
         on_click=go_to_select_platforms,
     ),
     Button(Const("Полезные ссылки 💻"), id="useful_links", on_click=go_to_useful_links),
-    Button(Const("Обратная связь 📧"), id="feedback"),
+    Button(Const("Обратная связь 📧"), id="feedback", on_click=go_to_feedback),
     state=MainMenuStates.main,
 )
 
