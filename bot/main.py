@@ -4,7 +4,6 @@ from aiogram import Bot, Dispatcher
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram_dialog import DialogManager, StartMode, setup_dialogs
-
 from config import settings
 from dialogs.feedback_menu.window import dialog as feedback_dialog
 from dialogs.main_menu.windows import main_menu_dialog

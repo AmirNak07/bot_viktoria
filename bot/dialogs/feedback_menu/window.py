@@ -1,7 +1,6 @@
 from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button
 from aiogram_dialog.widgets.text import Const
-
 from dialogs.feedback_menu.states import FeedbackStates
 from dialogs.platform_search.handlers import go_to_main_menu
 
