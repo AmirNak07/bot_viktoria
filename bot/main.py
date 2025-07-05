@@ -4,11 +4,13 @@ from aiogram import Bot, Dispatcher
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram_dialog import DialogManager, StartMode, setup_dialogs
-
 from config import settings
-from dialogs.main_menu import main_menu_dialog
-from dialogs.platform_search.dialog import platform_search_dialog
-from dialogs.start import StartStates, start_dialog
+from dialogs.feedback_menu.window import dialog as feedback_dialog
+from dialogs.main_menu.windows import main_menu_dialog
+from dialogs.platform_search.windows import platform_search_dialog
+from dialogs.start.states import StartStates
+from dialogs.start.windows import start_dialog
+from dialogs.useful_links.window import dialog as useful_link_dialog
 
 bot = Bot(token=settings.BOT_TOKEN)
 dp = Dispatcher()
@@ -23,6 +25,8 @@ async def main() -> None:
     dp.include_router(start_dialog)
     dp.include_router(main_menu_dialog)
     dp.include_router(platform_search_dialog)
+    dp.include_router(useful_link_dialog)
+    dp.include_router(feedback_dialog)
     setup_dialogs(dp)
     await dp.start_polling(bot)
 
