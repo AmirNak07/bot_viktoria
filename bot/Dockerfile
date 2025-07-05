@@ -5,8 +5,8 @@ RUN pip install --upgrade --no-cache-dir uv==0.7.19
 WORKDIR /app
 
 COPY pyproject.toml uv.lock* ./
-RUN uv pip compile --group bot --output-file requirements.txt && pip install -r --no-cache-dir requirements.txt
+RUN uv sync --locked --no-dev --group bot
 
 COPY bot ./bot
 
-CMD [ "python", "bot/main.py" ]
+CMD [ "uv", "run", "--no-dev", "bot/main.py" ]
