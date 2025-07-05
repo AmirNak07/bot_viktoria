@@ -15,9 +15,8 @@ repos:
     rev: v0.11.6
     hooks:
       - id: ruff
-        args: [--fix, --config=pyproject.toml]
+        args: [--fix]
       - id: ruff-format
-        args: [--config=pyproject.toml]
 
   # Dockerfile
   - repo: https://github.com/hadolint/hadolint
