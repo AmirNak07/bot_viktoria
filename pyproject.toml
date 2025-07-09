@@ -16,6 +16,9 @@ bot = [
     "aiogram-dialog>=2.3.1",
     "pydantic-settings>=2.10.0",
 ]
+parser = [
+    "httpx>=0.28.1",
+]
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
