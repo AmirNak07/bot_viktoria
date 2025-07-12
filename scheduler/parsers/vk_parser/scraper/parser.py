@@ -1,7 +1,7 @@
 import json
 from typing import Any
 
-from config import VACANCY_URL_TEMPLATE
+from parsers.vk_parser.config import VACANCY_URL_TEMPLATE
 
 
 def extract_json_data(html: str, key: str) -> dict[str, Any]:
@@ -31,8 +31,8 @@ def transform_vacancy_data(data: list[dict[str, Any]]) -> list[dict[str, str]]:
         tmp["city"] = id["city"]
         tmp["format_of_work"] = id["format"]
         tmp["employment"] = id["employment"]
-        tmp["tasks"] = "\n".join(id["landing"]["aboutTasksText"]["items"])
-        tmp["need_to_have"] = "\n".join(id["landing"]["aboutSkillsText"]["items"])
+        tmp["tasks"] = id["landing"]["aboutTasksText"]["items"]
+        tmp["need_to_have"] = id["landing"]["aboutSkillsText"]["items"]
         tmp["link"] = VACANCY_URL_TEMPLATE.format(vacancy_id=id["id"])
         tmp["type_of_work"] = (
             "Стажировка" if id["internship_type"] == "internship" else "Вакансия"

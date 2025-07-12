@@ -1,16 +1,13 @@
-import asyncio
-import json
-
-from config import LINKS, VACANCY_URL_TEMPLATE
-from scraper.downloader import fetch_multiple_pages
-from scraper.parser import (
+from parsers.vk_parser.config import LINKS, VACANCY_URL_TEMPLATE
+from parsers.vk_parser.scraper.downloader import fetch_multiple_pages
+from parsers.vk_parser.scraper.parser import (
     extract_json_data,
     extract_vacancy_ids,
     transform_vacancy_data,
 )
 
 
-async def main() -> None:
+async def collect() -> list[dict[str, str]]:
     # Getting a page with job listings
     list_pages = await fetch_multiple_pages(LINKS)
 
@@ -30,9 +27,4 @@ async def main() -> None:
     vacancies_data = [extract_json_data(page, "vacancy") for page in detail_pages]
     vacancies = transform_vacancy_data(vacancies_data)
 
-    with open("result.json", "w", encoding="utf-8") as f:
-        json.dump(vacancies, f, indent=4, ensure_ascii=False)
-
-
-if __name__ == "__main__":
-    asyncio.run(main())
+    return vacancies
