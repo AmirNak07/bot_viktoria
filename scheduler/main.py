@@ -10,7 +10,7 @@ async def main() -> None:
     data = await collect()
     documents = [VKEventModel(**item) for item in data]
 
-    await VKEventModel.find_all().delete_many()
+    await VKEventModel.find(VKEventModel.creator == "vk").delete()
 
     for doc in documents:
         await doc.insert()

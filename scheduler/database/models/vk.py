@@ -2,6 +2,7 @@ from beanie import Document
 
 
 class VKEventModel(Document):
+    creator: str
     title: str
     team: str
     city: str
