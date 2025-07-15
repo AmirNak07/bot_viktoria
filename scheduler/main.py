@@ -1,19 +1,22 @@
 import asyncio
 
-from database.init import init_db
-from database.models.vk import VKEventModel
-from parsers.vk_parser.parser import collect
+from apscheduler.schedulers.asyncio import AsyncIOScheduler  # type: ignore
+from tasks.vk import parse_vk
 
 
 async def main() -> None:
-    await init_db()
-    data = await collect()
-    documents = [VKEventModel(**item) for item in data]
+    scheduler = AsyncIOScheduler()
 
-    await VKEventModel.find(VKEventModel.creator == "vk").delete()
+    scheduler.add_job(
+        parse_vk,
+        trigger="interval",
+        hours=3,
+        id="vk_parser_job",
+        max_instances=1,
+    )
+    scheduler.start()
+    await asyncio.Event().wait()
 
-    for doc in documents:
-        await doc.insert()
 
-
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
