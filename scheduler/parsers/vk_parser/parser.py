@@ -1,6 +1,6 @@
-from parsers.vk_parser.config import LINKS, VACANCY_URL_TEMPLATE
-from parsers.vk_parser.scraper.downloader import fetch_multiple_pages
-from parsers.vk_parser.scraper.parser import (
+from scheduler.parsers.vk_parser.config import LINKS, VACANCY_URL_TEMPLATE
+from scheduler.parsers.vk_parser.scraper.downloader import fetch_multiple_pages
+from scheduler.parsers.vk_parser.scraper.parser import (
     extract_json_data,
     extract_vacancy_ids,
     transform_vacancy_data,

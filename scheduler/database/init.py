@@ -1,8 +1,8 @@
 from beanie import init_beanie
-from config import settings
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from database.models.vk import VKEventModel
+from scheduler.config import settings
+from scheduler.database.models.vk import VKEventModel
 
 
 async def init_db() -> None:

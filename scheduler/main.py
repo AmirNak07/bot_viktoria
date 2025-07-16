@@ -1,7 +1,8 @@
 import asyncio
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler  # type: ignore
-from tasks.vk import parse_vk
+
+from scheduler.tasks.vk import parse_vk
 
 
 async def main() -> None:

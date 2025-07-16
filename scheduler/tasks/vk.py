@@ -1,7 +1,8 @@
-from database.init import init_db
-from database.models.vk import VKEventModel
-from parsers.vk_parser.parser import collect
 from tenacity import retry, stop_after_attempt, wait_fixed
+
+from scheduler.database.init import init_db
+from scheduler.database.models.vk import VKEventModel
+from scheduler.parsers.vk_parser.parser import collect
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(10), reraise=True)

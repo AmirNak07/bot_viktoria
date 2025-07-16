@@ -1,7 +1,7 @@
 import json
 from typing import Any
 
-from parsers.vk_parser.config import VACANCY_URL_TEMPLATE
+from scheduler.parsers.vk_parser.config import VACANCY_URL_TEMPLATE
 
 
 def extract_json_data(html: str, key: str) -> dict[str, Any]:
