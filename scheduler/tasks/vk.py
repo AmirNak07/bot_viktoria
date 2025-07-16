@@ -5,7 +5,7 @@ from scheduler.database.models.vk import VKEventModel
 from scheduler.parsers.vk_parser.parser import collect
 
 
-@retry(stop=stop_after_attempt(3), wait=wait_fixed(10), reraise=True)
+@retry(stop=stop_after_attempt(3), wait=wait_fixed(10 * 60), reraise=True)
 async def parse_vk() -> None:
     await init_db()
     data = await collect()
