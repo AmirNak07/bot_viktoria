@@ -13,7 +13,7 @@ from scheduler.parsers.rosmol_parser.scraper.parser import get_forum_links, pars
 
 
 async def collect() -> list[dict[str, Any]]:
-    async with AsyncClient() as session:
+    async with AsyncClient(timeout=15) as session:
         main_page_url = f"{ROSMOL_FORUMS_URL}/{ROSMOL_FORUMS_PATH}"
         html = await fetch_page(session, main_page_url, ROSMOL_FORUMS_PARAM)
 
