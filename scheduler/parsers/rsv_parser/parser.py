@@ -13,7 +13,7 @@ from scheduler.parsers.rsv_parser.scraper.parser import parse_internships
 
 
 async def collect() -> list[dict[str, Any]]:
-    async with AsyncClient() as session:
+    async with AsyncClient(timeout=15) as session:
         tasks = [
             fetch_page_json(
                 session,
