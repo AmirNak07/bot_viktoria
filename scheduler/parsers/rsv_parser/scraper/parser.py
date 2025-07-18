@@ -8,7 +8,7 @@ def parse_internships(
     for i in internships:
         tmp = {}
         tmp["title"] = i["name"]
-        tmp["instute_name"] = i["instituteName"]
+        tmp["institute_name"] = i["instituteName"]
         tmp["regions"] = (
             regions[i["region_ids"][0]]
             if len(i["region_ids"]) == 1
