@@ -2,10 +2,10 @@ from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button, Row
 from aiogram_dialog.widgets.text import Const, Format
 
-from dialogs.platform_search.handlers import go_to_main_menu
-from dialogs.useful_links.getter import get_links_data
-from dialogs.useful_links.handlers import on_next_click, on_prev_click
-from dialogs.useful_links.states import UserfulLinksStates
+from bot.dialogs.platform_search.handlers import go_to_main_menu
+from bot.dialogs.useful_links.getter import get_links_data
+from bot.dialogs.useful_links.handlers import on_next_click, on_prev_click
+from bot.dialogs.useful_links.states import UserfulLinksStates
 
 dialog = Dialog(
     Window(

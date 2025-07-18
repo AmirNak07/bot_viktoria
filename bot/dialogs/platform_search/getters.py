@@ -2,8 +2,8 @@ from typing import Any
 
 from aiogram_dialog import DialogManager
 
-from dialogs.platform_search.mkpatch import get_plarforms_info, get_platforms_name
-from dialogs.platform_search.utils.for_text import generate_event_text
+from bot.dialogs.platform_search.mkpatch import get_plarforms_info, get_platforms_name
+from bot.dialogs.platform_search.utils.for_text import generate_event_text
 
 
 async def get_platforms(

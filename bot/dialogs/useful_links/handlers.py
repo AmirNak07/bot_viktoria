@@ -2,7 +2,7 @@ from aiogram.types import CallbackQuery
 from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.kbd import Button
 
-from dialogs.useful_links.getter import get_links_data
+from bot.dialogs.useful_links.getter import get_links_data
 
 
 async def on_prev_click(

@@ -4,13 +4,14 @@ from aiogram import Bot, Dispatcher
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram_dialog import DialogManager, StartMode, setup_dialogs
-from config import settings
-from dialogs.feedback_menu.window import dialog as feedback_dialog
-from dialogs.main_menu.windows import main_menu_dialog
-from dialogs.platform_search.windows import platform_search_dialog
-from dialogs.start.states import StartStates
-from dialogs.start.windows import start_dialog
-from dialogs.useful_links.window import dialog as useful_link_dialog
+
+from bot.config import settings
+from bot.dialogs.feedback_menu.window import dialog as feedback_dialog
+from bot.dialogs.main_menu.windows import main_menu_dialog
+from bot.dialogs.platform_search.windows import platform_search_dialog
+from bot.dialogs.start.states import StartStates
+from bot.dialogs.start.windows import start_dialog
+from bot.dialogs.useful_links.window import dialog as useful_link_dialog
 
 bot = Bot(token=settings.BOT_TOKEN)
 dp = Dispatcher()

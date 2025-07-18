@@ -4,8 +4,8 @@ from aiogram.types import CallbackQuery
 from aiogram_dialog import DialogManager
 from aiogram_dialog.widgets.kbd import Button
 
-from dialogs.platform_search.getters import get_platform_info, get_platforms
-from dialogs.platform_search.states import PlatformSearchStates
+from bot.dialogs.platform_search.getters import get_platform_info, get_platforms
+from bot.dialogs.platform_search.states import PlatformSearchStates
 
 
 async def on_prev_click(

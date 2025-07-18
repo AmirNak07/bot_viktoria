@@ -2,16 +2,16 @@ from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button, Column, Row, Select
 from aiogram_dialog.widgets.text import Const, Format
 
-from dialogs.platform_search.getters import get_platform_info, get_platforms
-from dialogs.platform_search.handlers import (
+from bot.dialogs.platform_search.getters import get_platform_info, get_platforms
+from bot.dialogs.platform_search.handlers import (
     go_to_main_menu,
     go_to_platform_select,
     on_next_click,
     on_platform_selected,
     on_prev_click,
 )
-from dialogs.platform_search.states import PlatformSearchStates
-from dialogs.platform_search.utils.for_text import DynamicFormat
+from bot.dialogs.platform_search.states import PlatformSearchStates
+from bot.dialogs.platform_search.utils.for_text import DynamicFormat
 
 choose_platform_window = Window(
     Const("Выбери платформу:"),

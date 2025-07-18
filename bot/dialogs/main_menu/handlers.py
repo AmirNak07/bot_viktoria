@@ -2,9 +2,9 @@ from typing import Any
 
 from aiogram_dialog import DialogManager
 
-from dialogs.feedback_menu.states import FeedbackStates
-from dialogs.platform_search.states import PlatformSearchStates
-from dialogs.useful_links.states import UserfulLinksStates
+from bot.dialogs.feedback_menu.states import FeedbackStates
+from bot.dialogs.platform_search.states import PlatformSearchStates
+from bot.dialogs.useful_links.states import UserfulLinksStates
 
 
 async def go_to_select_platforms(

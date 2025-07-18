@@ -9,4 +9,4 @@ RUN uv sync --locked --no-dev --group bot
 
 COPY bot ./bot
 
-CMD [ "uv", "run", "--no-dev", "bot/main.py" ]
+CMD [ "uv", "run", "-m", "--no-dev", "bot.main" ]

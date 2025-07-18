@@ -2,8 +2,8 @@ from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button
 from aiogram_dialog.widgets.text import Const
 
-from dialogs.start.handlers import go_to_main_menu
-from dialogs.start.states import StartStates
+from bot.dialogs.start.handlers import go_to_main_menu
+from bot.dialogs.start.states import StartStates
 
 greeting_window = Window(
     Const("""Ещё раз привет! 👋
