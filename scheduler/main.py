@@ -3,6 +3,7 @@ import asyncio
 from apscheduler.schedulers.asyncio import AsyncIOScheduler  # type: ignore
 
 from scheduler.tasks.rosmol import parse_rosmol
+from scheduler.tasks.rsv import parser_rsv
 from scheduler.tasks.vk import parse_vk
 
 
@@ -22,6 +23,14 @@ async def main() -> None:
         trigger="interval",
         hours=3,
         id="rosmol_parser_job",
+        max_instances=1,
+    )
+
+    scheduler.add_job(
+        parser_rsv,
+        trigger="interval",
+        hours=3,
+        id="rsv_parser_job",
         max_instances=1,
     )
 

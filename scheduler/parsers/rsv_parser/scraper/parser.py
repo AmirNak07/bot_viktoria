@@ -6,7 +6,8 @@ def parse_internships(
 ) -> list[dict[str, Any]]:
     result = []
     for i in internships:
-        tmp = {}
+        tmp: dict[str, str | list[str]] = {}
+        tmp["creator"] = "rsv"
         tmp["title"] = i["name"]
         tmp["institute_name"] = i["instituteName"]
         tmp["regions"] = (
