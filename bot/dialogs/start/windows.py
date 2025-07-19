@@ -23,4 +23,4 @@ greeting_window = Window(
     state=StartStates.greeting,
 )
 
-start_dialog = Dialog(greeting_window)
+dialog = Dialog(greeting_window)

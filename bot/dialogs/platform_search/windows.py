@@ -60,4 +60,4 @@ platform_info_window = Window(
 )
 
 
-platform_search_dialog = Dialog(choose_platform_window, platform_info_window)
+dialog = Dialog(choose_platform_window, platform_info_window)

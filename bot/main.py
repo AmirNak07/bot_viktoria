@@ -6,12 +6,8 @@ from aiogram.types import Message
 from aiogram_dialog import DialogManager, StartMode, setup_dialogs
 
 from bot.config import settings
-from bot.dialogs.feedback_menu.window import dialog as feedback_dialog
-from bot.dialogs.main_menu.windows import main_menu_dialog
-from bot.dialogs.platform_search.windows import platform_search_dialog
+from bot.dialogs import dialogs
 from bot.dialogs.start.states import StartStates
-from bot.dialogs.start.windows import start_dialog
-from bot.dialogs.useful_links.window import dialog as useful_link_dialog
 
 bot = Bot(token=settings.BOT_TOKEN)
 dp = Dispatcher()
@@ -23,11 +19,7 @@ async def command_start(message: Message, dialog_manager: DialogManager) -> None
 
 
 async def main() -> None:
-    dp.include_router(start_dialog)
-    dp.include_router(main_menu_dialog)
-    dp.include_router(platform_search_dialog)
-    dp.include_router(useful_link_dialog)
-    dp.include_router(feedback_dialog)
+    dp.include_routers(*dialogs)
     setup_dialogs(dp)
     await dp.start_polling(bot)
 

@@ -21,4 +21,4 @@ main_menu_window = Window(
     state=MainMenuStates.main,
 )
 
-main_menu_dialog = Dialog(main_menu_window)
+dialog = Dialog(main_menu_window)
