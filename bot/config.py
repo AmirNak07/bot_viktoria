@@ -7,6 +7,7 @@ CURRENT_DIR = Path(__file__).resolve().parent
 
 class Settings(BaseSettings):
     BOT_TOKEN: str
+    REDIS_URL: str
 
     model_config = SettingsConfigDict(
         env_file=CURRENT_DIR / ".env", env_file_encoding="utf-8"

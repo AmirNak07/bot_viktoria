@@ -2,6 +2,8 @@ import asyncio
 
 from aiogram import Bot, Dispatcher
 from aiogram.filters import CommandStart
+from aiogram.fsm.storage.base import DefaultKeyBuilder
+from aiogram.fsm.storage.redis import RedisStorage
 from aiogram.types import Message
 from aiogram_dialog import DialogManager, StartMode, setup_dialogs
 
@@ -10,7 +12,10 @@ from bot.dialogs import dialogs
 from bot.dialogs.start.states import StartStates
 
 bot = Bot(token=settings.BOT_TOKEN)
-dp = Dispatcher()
+storage = RedisStorage.from_url(
+    settings.REDIS_URL, key_builder=DefaultKeyBuilder(with_destiny=True)
+)
+dp = Dispatcher(storage=storage)
 
 
 @dp.message(CommandStart())
