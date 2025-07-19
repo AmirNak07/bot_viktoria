@@ -2,9 +2,7 @@ import asyncio
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler  # type: ignore
 
-from scheduler.tasks.rosmol import parse_rosmol
-from scheduler.tasks.rsv import parser_rsv
-from scheduler.tasks.vk import parse_vk
+from scheduler.tasks import parse_rosmol, parse_vk, parser_rsv
 
 
 async def main() -> None:
