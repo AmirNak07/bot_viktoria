@@ -15,7 +15,6 @@ async def main() -> None:
         trigger="interval",
         hours=3,
         id="vk_parser_job",
-        max_instances=1,
     )
 
     scheduler.add_job(
@@ -23,7 +22,6 @@ async def main() -> None:
         trigger="interval",
         hours=3,
         id="rosmol_parser_job",
-        max_instances=1,
     )
 
     scheduler.add_job(
@@ -31,7 +29,6 @@ async def main() -> None:
         trigger="interval",
         hours=3,
         id="rsv_parser_job",
-        max_instances=1,
     )
 
     scheduler.start()
