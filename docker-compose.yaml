@@ -1,15 +1,19 @@
 services:
   mongodb:
-    image: mongodb/mongodb-community-server:latest
+    image: mongo:latest
     container_name: mongodb
     restart: unless-stopped
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootpassword
+      - MONGO_INITDB_DATABASE=mydatabase
     volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - mongodb_data:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - app_network
 
   bot:
     build:
@@ -21,6 +25,8 @@ services:
       - mongodb
     env_file:
       - ./bot/.env
+    networks:
+      - app_network
 
   scheduler:
     build:
@@ -32,6 +38,12 @@ services:
       - mongodb
     env_file:
       - ./scheduler/.env
+    networks:
+      - app_network
 
 volumes:
   mongodb_data:
+
+networks:
+  app_network:
+    driver: bridge
