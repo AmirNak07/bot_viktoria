@@ -26,7 +26,7 @@ def transform_vacancy_data(data: list[dict[str, Any]]) -> list[dict[str, str]]:
     result_json = []
     for id in data:
         tmp = {}
-        tmp["creator"] = "vk"
+        tmp["creator"] = "ВК"
         tmp["title"] = id["title"]
         tmp["team"] = id["business_unit"]["name"]
         tmp["city"] = id["city"]

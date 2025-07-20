@@ -16,7 +16,7 @@ async def main() -> None:
 
     scheduler.add_job(
         parse_vk,
-        kwargs={"collection": collection, "creator": "vk"},
+        kwargs={"collection": collection, "creator": "ВК"},
         trigger="interval",
         hours=3,
         id="vk_parser_job",
@@ -24,7 +24,7 @@ async def main() -> None:
 
     scheduler.add_job(
         parse_rosmol,
-        kwargs={"collection": collection, "creator": "rosmol"},
+        kwargs={"collection": collection, "creator": "Росмолодёжь"},
         trigger="interval",
         hours=3,
         id="rosmol_parser_job",
@@ -32,7 +32,7 @@ async def main() -> None:
 
     scheduler.add_job(
         parser_rsv,
-        kwargs={"collection": collection, "creator": "rsv"},
+        kwargs={"collection": collection, "creator": "Россия - страна возможностей"},
         trigger="interval",
         hours=3,
         id="rsv_parser_job",

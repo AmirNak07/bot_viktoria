@@ -55,7 +55,7 @@ def parse_html(forums_html: list[str]) -> list[dict[str, Any]]:
     for html in forums_html:
         soup = BeautifulSoup(html, "html.parser")
         tmp = {}
-        tmp["creator"] = "rosmol"
+        tmp["creator"] = "Росмолодёжь"
         tmp["title"] = (
             safe_find(soup, "h1", {"class": "forum-name"})
             .text.replace("\n", " ")
