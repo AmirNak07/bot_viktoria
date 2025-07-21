@@ -2,7 +2,7 @@ from typing import Any
 
 from aiogram_dialog import DialogManager
 
-from dialogs.useful_links.mkpatch import get_links
+from bot.dialogs.useful_links.mkpatch import get_links
 
 
 async def get_links_data(

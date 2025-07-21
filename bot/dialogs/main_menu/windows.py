@@ -2,12 +2,12 @@ from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button
 from aiogram_dialog.widgets.text import Const
 
-from dialogs.main_menu.handlers import (
+from bot.dialogs.main_menu.handlers import (
     go_to_feedback,
     go_to_select_platforms,
     go_to_useful_links,
 )
-from dialogs.main_menu.states import MainMenuStates
+from bot.dialogs.main_menu.states import MainMenuStates
 
 main_menu_window = Window(
     Const("Выбирай, с чего начнём:"),
@@ -21,4 +21,4 @@ main_menu_window = Window(
     state=MainMenuStates.main,
 )
 
-main_menu_dialog = Dialog(main_menu_window)
+dialog = Dialog(main_menu_window)

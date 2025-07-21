@@ -2,19 +2,19 @@ from aiogram_dialog import Dialog, Window
 from aiogram_dialog.widgets.kbd import Button, Column, Row, Select
 from aiogram_dialog.widgets.text import Const, Format
 
-from dialogs.platform_search.getters import get_platform_info, get_platforms
-from dialogs.platform_search.handlers import (
+from bot.dialogs.platform_search.getters import get_platform_info, get_platforms
+from bot.dialogs.platform_search.handlers import (
     go_to_main_menu,
     go_to_platform_select,
     on_next_click,
     on_platform_selected,
     on_prev_click,
 )
-from dialogs.platform_search.states import PlatformSearchStates
-from dialogs.platform_search.utils.for_text import DynamicFormat
+from bot.dialogs.platform_search.states import PlatformSearchStates
+from bot.dialogs.platform_search.utils.for_text import DynamicFormat
 
 choose_platform_window = Window(
-    Const("Выбери платформу:"),
+    Format("Выбери платформу:", when="has_platforms"),
     Column(
         Select(
             text=Format("{item[name]}"),
@@ -24,13 +24,20 @@ choose_platform_window = Window(
             on_click=on_platform_selected,  # type: ignore
         ),
         Button(text=Const("⬅️ Назад"), id="back_button", on_click=go_to_main_menu),
+        when="has_platforms",
+    ),
+    Format("На данный момент никаких платформ нет(", when="dont_has_platforms"),
+    Button(
+        text=Const("⬅️ Назад"),
+        id="back_button",
+        on_click=go_to_main_menu,
+        when="dont_has_platforms",
     ),
     state=PlatformSearchStates.select_platform,
     getter=get_platforms,
 )
 
 platform_info_window = Window(
-    Format("Проект: {platform_name}"),
     DynamicFormat(
         "{event_text}", fallback="Нет информации о мероприятии в данный момент"
     ),
@@ -60,4 +67,4 @@ platform_info_window = Window(
 )
 
 
-platform_search_dialog = Dialog(choose_platform_window, platform_info_window)
+dialog = Dialog(choose_platform_window, platform_info_window)

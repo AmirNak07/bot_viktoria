@@ -6,8 +6,6 @@ CURRENT_DIR = Path(__file__).resolve().parent
 
 
 class Settings(BaseSettings):
-    BOT_TOKEN: str
-    REDIS_URL: str
     MONGO_URI: str
 
     model_config = SettingsConfigDict(

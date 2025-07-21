@@ -2,7 +2,7 @@ from typing import Any
 
 from aiogram_dialog import DialogManager, StartMode
 
-from dialogs.main_menu.states import MainMenuStates
+from bot.dialogs.main_menu.states import MainMenuStates
 
 
 async def go_to_main_menu(event: Any, handler: Any, manager: DialogManager) -> None:
