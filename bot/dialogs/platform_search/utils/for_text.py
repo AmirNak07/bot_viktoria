@@ -1,3 +1,4 @@
+from collections.abc import Sequence
 from typing import Any
 
 from aiogram_dialog import DialogManager
@@ -24,9 +25,14 @@ class DynamicFormat(Format):
 
 def generate_event_text(event: dict[str, Any]) -> str:
     lines = []
+    del event["Платформа"]
+    lines.append(f"📌 {event.pop('Название')}")
     for key, value in event.items():
         if value:
-            lines.append(f"{key}: {value}")
+            if isinstance(value, str):
+                lines.append(f"<b>{key}</b>: {value}")
+            elif isinstance(value, Sequence):
+                lines.append(f"<b>{key}</b>: \n- {'\n- '.join(value)}")
         else:
             lines.append(f"{key}: 'Нет информации'")
     return "\n".join(lines) if lines else "Нет информации о мероприятии"

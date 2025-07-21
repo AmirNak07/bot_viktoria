@@ -481,6 +481,7 @@ bot = [
     { name = "aiogram" },
     { name = "aiogram-dialog" },
     { name = "pydantic-settings" },
+    { name = "pymongo" },
     { name = "redis" },
 ]
 dev = [
@@ -503,6 +504,7 @@ bot = [
     { name = "aiogram", specifier = ">=3.20.0.post0" },
     { name = "aiogram-dialog", specifier = ">=2.3.1" },
     { name = "pydantic-settings", specifier = ">=2.10.0" },
+    { name = "pymongo", specifier = ">=4.13.2" },
     { name = "redis", specifier = ">=6.2.0" },
 ]
 dev = [

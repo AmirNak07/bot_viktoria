@@ -14,7 +14,7 @@ from bot.dialogs.platform_search.states import PlatformSearchStates
 from bot.dialogs.platform_search.utils.for_text import DynamicFormat
 
 choose_platform_window = Window(
-    Const("Выбери платформу:"),
+    Format("Выбери платформу:", when="has_platforms"),
     Column(
         Select(
             text=Format("{item[name]}"),
@@ -24,13 +24,20 @@ choose_platform_window = Window(
             on_click=on_platform_selected,  # type: ignore
         ),
         Button(text=Const("⬅️ Назад"), id="back_button", on_click=go_to_main_menu),
+        when="has_platforms",
+    ),
+    Format("На данный момент никаких платформ нет(", when="dont_has_platforms"),
+    Button(
+        text=Const("⬅️ Назад"),
+        id="back_button",
+        on_click=go_to_main_menu,
+        when="dont_has_platforms",
     ),
     state=PlatformSearchStates.select_platform,
     getter=get_platforms,
 )
 
 platform_info_window = Window(
-    Format("Проект: {platform_name}"),
     DynamicFormat(
         "{event_text}", fallback="Нет информации о мероприятии в данный момент"
     ),
