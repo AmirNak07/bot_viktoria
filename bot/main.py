@@ -16,8 +16,11 @@ from bot.config import settings
 from bot.dialogs import dialogs
 from bot.dialogs.start.states import StartStates
 from bot.middlewares.service_middleware import ServiceMiddleware
+from bot.middlewares.user_middleware import UserCheckMiddleware
 from bot.repositories.event_repo import EventsRepository
+from bot.repositories.user_repo import UsersRepository
 from bot.services.event_service import EventService
+from bot.services.user_service import UsersService
 
 bot = Bot(
     token=settings.BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML)
@@ -30,11 +33,17 @@ dp = Dispatcher(storage=storage)
 
 client = AsyncMongoClient(settings.MONGO_URI)  # type: ignore
 db = client.mydatabase
-collection = db.events
+event_collection = db.events
 
-event_repo = EventsRepository(collection)
+event_repo = EventsRepository(event_collection)
 event_service = EventService(event_repo)
-dp.update.middleware(ServiceMiddleware(event_service))
+
+user_collection = db.users
+user_repo = UsersRepository(user_collection)
+user_service = UsersService(user_repo)
+
+dp.update.outer_middleware(ServiceMiddleware(event_service, user_service))
+dp.update.middleware(UserCheckMiddleware())
 
 
 @dp.message(CommandStart())

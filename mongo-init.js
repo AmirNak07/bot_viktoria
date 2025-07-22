@@ -12,3 +12,4 @@ db.createUser({
 });
 
 db.createCollection("events")
+db.createCollection("users")
