@@ -1,10 +1,11 @@
 from typing import Any
 
 from bot.repositories.event_repo import EventsRepository
+from bot.services.interfaces import IEventsService
 from bot.utils.field_labels import format_event
 
 
-class EventService:
+class EventsService(IEventsService):
     def __init__(self, repo: EventsRepository):
         self.repo = repo
 

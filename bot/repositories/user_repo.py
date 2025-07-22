@@ -2,8 +2,10 @@ from typing import Any
 
 from pymongo.asynchronous.collection import AsyncCollection
 
+from bot.repositories.interfaces import IUsersRepository
 
-class UsersRepository:
+
+class UsersRepository(IUsersRepository):
     def __init__(self, collection: AsyncCollection[dict[str, Any]]):
         self.collection = collection
 

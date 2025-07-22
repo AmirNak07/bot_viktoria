@@ -2,8 +2,10 @@ from typing import Any
 
 from pymongo.asynchronous.collection import AsyncCollection
 
+from bot.repositories.interfaces import IEventsRepository
 
-class EventsRepository:
+
+class EventsRepository(IEventsRepository):
     def __init__(self, collection: AsyncCollection[dict[str, Any]]):
         self.collection = collection
 

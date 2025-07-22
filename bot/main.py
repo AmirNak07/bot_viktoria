@@ -10,17 +10,15 @@ from aiogram.fsm.storage.base import DefaultKeyBuilder
 from aiogram.fsm.storage.redis import RedisStorage
 from aiogram.types import Message
 from aiogram_dialog import DialogManager, StartMode, setup_dialogs
-from pymongo import AsyncMongoClient
 
 from bot.config import settings
+from bot.container import build_container
 from bot.dialogs import dialogs
 from bot.dialogs.start.states import StartStates
 from bot.middlewares.service_middleware import ServiceMiddleware
 from bot.middlewares.user_middleware import UserCheckMiddleware
-from bot.repositories.event_repo import EventsRepository
-from bot.repositories.user_repo import UsersRepository
-from bot.services.event_service import EventService
-from bot.services.user_service import UsersService
+
+container = build_container(settings.MONGO_URI, "mydatabase")
 
 bot = Bot(
     token=settings.BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML)
@@ -30,19 +28,12 @@ storage = RedisStorage.from_url(
 )
 dp = Dispatcher(storage=storage)
 
+services = {
+    "user_service": container["user_service"],
+    "event_service": container["event_service"],
+}
 
-client = AsyncMongoClient(settings.MONGO_URI)  # type: ignore
-db = client.mydatabase
-event_collection = db.events
-
-event_repo = EventsRepository(event_collection)
-event_service = EventService(event_repo)
-
-user_collection = db.users
-user_repo = UsersRepository(user_collection)
-user_service = UsersService(user_repo)
-
-dp.update.outer_middleware(ServiceMiddleware(event_service, user_service))
+dp.update.outer_middleware(ServiceMiddleware(services))
 dp.update.middleware(UserCheckMiddleware())
 
 
@@ -52,10 +43,13 @@ async def command_start(message: Message, dialog_manager: DialogManager) -> None
 
 
 async def main() -> None:
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    dp.include_routers(*dialogs)
-    setup_dialogs(dp)
-    await dp.start_polling(bot)
+    try:
+        logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+        dp.include_routers(*dialogs)
+        setup_dialogs(dp)
+        await dp.start_polling(bot)
+    finally:
+        await container["mongo"].close()
 
 
 if __name__ == "__main__":

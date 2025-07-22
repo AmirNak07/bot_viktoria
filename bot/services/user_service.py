@@ -1,9 +1,10 @@
 from typing import Any
 
 from bot.repositories.user_repo import UsersRepository
+from bot.services.interfaces import IUsersService
 
 
-class UsersService:
+class UsersService(IUsersService):
     def __init__(self, repo: UsersRepository):
         self.repo = repo
 
