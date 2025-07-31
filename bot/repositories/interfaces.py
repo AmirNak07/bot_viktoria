@@ -15,5 +15,6 @@ class IUsersRepository(Protocol):
         username: str | None,
         first_name: str,
         last_name: str | None,
-        is_new: bool,
+        is_active: bool,
     ) -> None: ...
+    async def get_all_user_ids(self) -> list[int]: ...

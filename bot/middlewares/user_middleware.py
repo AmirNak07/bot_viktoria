@@ -28,10 +28,10 @@ class UserCheckMiddleware(BaseMiddleware):
                 username=user.username,
                 first_name=user.first_name,
                 last_name=user.last_name,
-                is_new=True,
+                is_active=True,
             )
-            data["is_new_user"] = True
+            data["is_active"] = True
         else:
-            data["is_new_user"] = False
+            data["is_active"] = False
 
         return await handler(event, data)

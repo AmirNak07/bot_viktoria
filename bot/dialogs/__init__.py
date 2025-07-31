@@ -1,3 +1,4 @@
+from bot.dialogs.admin.windows import dialog as admin_dialog
 from bot.dialogs.feedback_menu.window import dialog as feedback_dialog
 from bot.dialogs.main_menu.windows import dialog as main_menu_dialog
 from bot.dialogs.platform_search.windows import dialog as platform_search_dialog
@@ -10,6 +11,7 @@ __all__ = [
     "platform_search_dialog",
     "start_dialog",
     "useful_links_dialog",
+    "admin_dialog",
 ]
 
 dialogs = [
@@ -18,4 +20,5 @@ dialogs = [
     platform_search_dialog,
     useful_links_dialog,
     feedback_dialog,
+    admin_dialog,
 ]

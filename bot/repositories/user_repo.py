@@ -19,7 +19,7 @@ class UsersRepository(IUsersRepository):
         username: str | None,
         first_name: str,
         last_name: str | None,
-        is_new: bool,
+        is_active: bool,
     ) -> None:
         await self.collection.insert_one(
             {
@@ -27,6 +27,13 @@ class UsersRepository(IUsersRepository):
                 "username": username,
                 "first_name": first_name,
                 "last_name": last_name,
-                "is_new": is_new,
+                "is_active": is_active,
             }
         )
+
+    async def get_all_user_ids(self) -> list[int]:
+        cursor = self.collection.find({"is_active": True}, {"user_id": 1})
+        user_ids = []
+        async for doc in cursor:
+            user_ids.append(doc["user_id"])
+        return user_ids

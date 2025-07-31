@@ -18,12 +18,16 @@ class UsersService(IUsersService):
         username: str | None,
         first_name: str,
         last_name: str | None,
-        is_new: bool,
+        is_active: bool,
     ) -> None:
         await self.repo.insert_user(
             user_id=user_id,
             username=username,
             first_name=first_name,
             last_name=last_name,
-            is_new=is_new,
+            is_active=is_active,
         )
+
+    async def get_all_user_ids(self) -> list[int]:
+        result = await self.repo.get_all_user_ids()
+        return result
