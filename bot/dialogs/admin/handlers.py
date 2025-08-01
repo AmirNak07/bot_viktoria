@@ -24,7 +24,18 @@ async def on_message_input(
 
     user_ids = await user_service.get_all_user_ids()  # type: ignore
 
+    failed_ids: list[int] = []
+
     for user_id in user_ids:
-        await notificate_message(js, text, user_id, notificate_subject)  # type: ignore
+        success = await notificate_message(js, text, user_id, notificate_subject)  # type: ignore
+        if not success:
+            failed_ids.append(user_id)
+
+    if failed_ids:
+        await message.answer(
+            f"Не удалось отправить сообщение {len(failed_ids)} пользователям."
+        )
+    else:
+        await message.answer("Сообщение успешно отправлено всем пользователям.")
 
     await dialog_manager.back()

@@ -13,6 +13,13 @@ from nats.js.api import StreamConfig
 
 async def build_container(connection_uri: str, db_name: str) -> dict[str, Any]:
     mongo = MongoDB(connection_uri, db_name)
+
+    try:
+        await mongo._client.server_info()  # Force connection test
+    except Exception as e:
+        print("[MongoDB Error] Failed to connect:", e)
+        raise
+
     collections = MongoCollections(mongo)
 
     user_repo = UsersRepository(collections.users)

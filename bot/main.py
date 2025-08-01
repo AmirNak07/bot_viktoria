@@ -16,6 +16,7 @@ from bot.container import build_container
 from bot.dialogs import dialogs
 from bot.dialogs.admin.states import AdminState
 from bot.dialogs.start.states import StartStates
+from bot.middlewares.error_handler import GlobalErrorMiddleware
 from bot.middlewares.service_middleware import ServiceMiddleware
 from bot.middlewares.user_middleware import UserCheckMiddleware
 from bot.utils.start_consumers import start_notificate_consumer
@@ -54,6 +55,9 @@ async def main() -> None:
 
         dp.update.outer_middleware(ServiceMiddleware(services))
         dp.update.middleware(UserCheckMiddleware())
+
+        dp.message.middleware(GlobalErrorMiddleware())
+        dp.callback_query.middleware(GlobalErrorMiddleware())
 
         logging.basicConfig(level=logging.INFO, stream=sys.stdout)
         dp.include_routers(*dialogs)
