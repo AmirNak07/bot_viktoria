@@ -23,6 +23,7 @@ services:
     restart: unless-stopped
     depends_on:
       - mongodb
+      - nats
     env_file:
       - ./bot/.env
     networks:
@@ -52,10 +53,39 @@ services:
     networks:
       - app_network
 
+  nats:
+    image: nats:latest
+    container_name: nats
+    restart: unless-stopped
+    entrypoint: /nats-server
+    command: -c /config/server.conf
+    ports:
+      - 4222:4222
+      - 8222:8222
+    volumes:
+      - nats_data:/data
+      - ./nats/config/server.conf:/config/server.conf
+    networks:
+      - app_network
+
+  nats-nui:
+    image: ghcr.io/nats-nui/nui:latest
+    container_name: nats-nui
+    ports:
+      - 31311:31311
+    volumes:
+      - nui_data:/db
+    depends_on:
+      - nats
+    networks:
+      - app_network
+
 
 volumes:
   mongodb_data:
   redis_data:
+  nats_data:
+  nui_data:
 
 networks:
   app_network:

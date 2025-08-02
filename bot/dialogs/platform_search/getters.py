@@ -3,13 +3,15 @@ from typing import Any
 from aiogram_dialog import DialogManager
 
 from bot.dialogs.platform_search.utils.for_text import generate_event_text
-from bot.services.event_service import EventService
+from bot.services.event_service import EventsService
 
 
 async def get_platforms(
-    dialog_manager: DialogManager, service: EventService, **kwargs: dict[Any, Any]
+    dialog_manager: DialogManager,
+    event_service: EventsService,
+    **kwargs: dict[Any, Any],
 ) -> dict[str, list[dict[str, Any]] | bool]:
-    platform_names = await service.get_creators()
+    platform_names = await event_service.get_creators()
     platforms = []
     if len(platform_names) != 0:
         for i, platform in enumerate(platform_names):
@@ -20,10 +22,12 @@ async def get_platforms(
 
 
 async def get_platform_info(
-    dialog_manager: DialogManager, service: EventService, **kwargs: dict[Any, Any]
+    dialog_manager: DialogManager,
+    event_service: EventsService,
+    **kwargs: dict[Any, Any],
 ) -> dict[str, Any]:
     platform_name = dialog_manager.dialog_data["current_platform"]["name"]
-    events = await service.get_by_creator(platform_name)
+    events = await event_service.get_by_creator(platform_name)
 
     current_index = dialog_manager.dialog_data.get("current_index", 0)
 

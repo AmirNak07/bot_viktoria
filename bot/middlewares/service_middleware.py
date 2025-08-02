@@ -4,13 +4,11 @@ from typing import Any
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject
 
-from bot.services.event_service import EventService
-
 
 class ServiceMiddleware(BaseMiddleware):
-    def __init__(self, service: EventService) -> None:
+    def __init__(self, services: dict[str, Any]) -> None:
         super().__init__()
-        self.service = service
+        self.services = services
 
     async def __call__(
         self,
@@ -18,5 +16,5 @@ class ServiceMiddleware(BaseMiddleware):
         event: TelegramObject,
         data: dict[str, Any],
     ) -> Any:
-        data["service"] = self.service
+        data.update(self.services)
         return await handler(event, data)

@@ -8,8 +8,8 @@ from bot.dialogs.useful_links.handlers import on_next_click, on_prev_click
 from bot.dialogs.useful_links.states import UserfulLinksStates
 
 useful_links_window = Window(
-    Format("<b>{platform_name}</b>"),
-    Format("<b>Описание</b>: {platform_description}"),
+    Format("📌 <b>{platform_name}</b>\n"),
+    Format("<b>Описание</b>: {platform_description}\n"),
     Format("<b>Перейти</b>: {platform_link}"),
     Row(
         Button(
